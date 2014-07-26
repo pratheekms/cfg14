@@ -89,15 +89,14 @@ def register(request):
 
 			if(reg_form['ment'] == 'mentor'):
 				mentor = models.Mentor(user = user, approved = False, rating = 0, skype_id = reg_form['SkypeId'], fb_id = reg_form['FbId'], state = reg_form['InputState'], city = reg_form['InputCity'])
-				mentor = mentor.save()
 				categories = request.POST.getlist('category')
 				for category in categories:
 					skill = Skills(category = category, sub_category = reg_form['InputMessage'])
 					skill.save()
 					mentor.mentor_skills.add(skill)
-					mentor.save()
+				mentor.save()
 				g = Group.objects.get(name='mentors') 
-				g.user_set.add(mentor)
+				g.user_set.add(user)
 				return redirect('pdp.views.mentor_dashboard')
 							
 			elif(reg_form['ment'] == 'mentee'):
@@ -107,9 +106,9 @@ def register(request):
 					skill = Skills(category = category, sub_category = reg_form['InputMessage'])
 					skill.save()
 					mentee.mentee_skills.add(skill)
-					mentee.save()
+				mentee.save()
 				g = Group.objects.get(name='mentees') 
-				g.user_set.add(mentee)
+				g.user_set.add(user)
 				return redirect('pdp.views.mentee_dashboard')
 
 			registered = True
