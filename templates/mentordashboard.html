@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 
 <head>
@@ -13,10 +14,10 @@
 
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet"><!--__Your_Work__ here-->
+    <link href="{% static"css/bootstrap.min.css" %}" rel="stylesheet"><!--__Your_Work__ here-->
 
     <!-- Custom CSS -->
-    <link href="css/round-about.css" rel="stylesheet">
+    <!--link href="css/round-about.css" rel="stylesheet"-->
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -75,37 +76,84 @@
 		<h1>NAME</h1>
 		<div class="row">
 		<div class="col-lg-9">
-        
-		<h2>Checklist</h2>
-		<form action="/YOUR_WORK" method="post">
-		<div class="row" id='app' style="margin-top:5%">
+        <div class="row" style="margin-top:5%">
 			
-			
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<h2>Name __YOUR_WORK__</h2>
+					<p>description</p>
+				</div>
+			  <div class="panel-footer">Mentee details</div>
+			</div>
 
-        <script>
-            var checkCounter = 1;
-			function add(){
-				
-				document.getElementById("app").innerHTML+='<div class="col-lg-12"><div class="input-group panel panel-default"><span class="input-group-addon"><input type="checkbox"></span>' + '<p style="margin-left:10px";>'+ document.getElementById("val").value+ '</p>' +'<input type="hidden" value="'+document.getElementById("val").value + " name=" + checkCounter + '"></input></div></div>';
-                document.getElementById("val").value = "";
-                checkCounter += 1;
-			}
-		</script>
+        </div>
 		
-						
+		<div class="row" style="margin-top:5%">
+			
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<h2>Name __YOUR_WORK__</h2>
+					<p>description</p>
+				</div>
+			  <div class="panel-footer">Mentee details</div>
+			</div>
+
+        </div>
+		
+		
+		<div class="row" style="margin-top:5%">
+			
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<h2>Name __YOUR_WORK__</h2>
+					<p>description</p>
+				</div>
+			  <div class="panel-footer">Mentee details</div>
+			</div>
+
+        </div>
+		
+		</div>
+		
+			<div class="col-lg-3 col-md-3">
+				
+				<div class="panel panel-default">
+				  <div class="panel-body">
+					This Is a REquest __YOUR_WORK__
+				  </div>
+				</div>
+				<div class="panel panel-default">
+				  <div class="panel-body">
+					This Is a REquest __YOUR_WORK__
+				  </div>
+				</div>
+				<div class="panel panel-default">
+				  <div class="panel-body">
+					This Is a REquest __YOUR_WORK__
+				  </div>
+				</div>
+				<div class="panel panel-default">
+				  <div class="panel-body">
+					This Is a REquest __YOUR_WORK__
+				  </div>
+				</div>
+				<div class="panel panel-default">
+				  <div class="panel-body">
+					This Is a REquest __YOUR_WORK__
+				  </div>
+				</div>
+				<div class="panel panel-default">
+				  <div class="panel-body">
+					This Is a REquest __YOUR_WORK__
+				  </div>
+				</div>
+				
 			</div>
 		</div>
-		</form>
-		</div>
-		<textarea class="form-control" id="val" value="" rows="3"></textarea>
-		<a class="btn btn-primary btn-lg" onclick="add()" role="button">Add More</a>
-        <input type="submit" value="Save" class="btn btn-primary btn-lg"/>
 		
-		<hr>
 
-        <a href="skype:__PLEASE__FILL__MENTOR'S__SKYPE__ID_HERE__?call&video=true">Start A Skype Session</a>
-        <a href="__PLEASE__FILL__MENTOR'S__FACEBOOK__PROFILE'S__LINK__HERE__">Connect On Facebook</a>
-        
+        <hr>
+
         <!-- Footer -->
         <footer>
             <div class="row">
