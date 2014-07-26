@@ -6,7 +6,7 @@ from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.models import User, Group
-
+from pdp import models
 
 def is_mentor(user):
 	return user.groups.filter(name = 'mentors')
@@ -55,6 +55,10 @@ def login(request):
 	else:
 		return render_to_response("login.html", {}, context)
 
+def register_mentor(request):
+	context = RequestContext(request)
+
+
 def mentor_dashboard(request):
 	return HttpResponse("Mentor dashboard")
 
@@ -69,3 +73,35 @@ def moderator_dashboard(request):
 
 def admin_dashboard(request):
 	return HttpResponse("admin dashboard")
+
+
+def register(request):
+	context = RequestContext(request)
+	registered = False
+	wrong_data = False
+
+	if request.method == 'POST':
+		reg_form = request.POST
+
+		if (reg_form['InputPassword'] == reg_form['InputConfirmPassword']):
+			if(reg_form['ment'] == 'mentor'):
+				mentor = models.Mentor(first_name = reg_form['InputFirstName'], last_name = reg_form['InputLastName'], email = reg_form['InputEmail'], city = reg_form['InputCity'], state = reg_form['InputState'], is_active = False, approved = False, rating = 0)
+				mentor = mentor.save()
+				mentor.set_password(reg_form['InputPassword'])
+				mentor.save()
+			
+			if(reg_form['ment'] == 'mentee'):
+				mentee = models.Mentee(first_name = reg_form['InputFirstName'], last_name = reg_form['InputLastName'], email = reg_form['InputEmail'], city = reg_form['InputCity'], state = reg_form['InputState'])
+				mentee = mentee.save()
+				mentee.set_password(reg_form['InputPassword'])
+				mentee.save()
+			registered = True
+		else:
+			print reg_form, reg_form.errors
+			wrong_data = True
+			render_to_response('register.html',{ 'registered': registered,'wrong_data' : wrong_data }, context)
+			
+	else:
+		render_to_response('register.html', {'registered': registered,'wrong_data' : wrong_data }, context)
+
+	return render_to_response('register.html', {'registered': registered,'wrong_data' : wrong_data }, context)
