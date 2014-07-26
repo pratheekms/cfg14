@@ -9,7 +9,6 @@ class Skills(models.Model):
 		)
 	category = models.CharField(max_length = 30, choices = category_list, default = 'Select a category')
 	sub_category = models.TextField()
-	test = models.BooleanField()
 
 class Mentor(User):
 #	user = models.OneToOneField(User)
@@ -19,7 +18,6 @@ class Mentor(User):
 	mentor_skills = models.ManyToManyField(Skills)
 	city = models.CharField(max_length = 30, blank = True)
 	state = models.CharField(max_length = 30, blank = True) 
-	test = models.BooleanField()
 
 	def __unicode__(self):
 		return self.user.username
@@ -31,7 +29,6 @@ class Mentee(User):
 	city = models.CharField(max_length = 30, blank = True)
 	state = models.CharField(max_length = 30, blank = True) 
 	# add additional fields if required
-	test = models.BooleanField()
 
 	def __unicode__(self):
 		return self.user.username
@@ -39,7 +36,6 @@ class Mentee(User):
 class Moderator(User):
 #	user = models.OneToOneField(User)
 	# add additional fields if required
-	test = models.BooleanField()
 
 	def __unicode__(self):
 		return self.user.username
@@ -48,7 +44,6 @@ class Moderator(User):
 class Admin(User):
 #	user = models.OneToOneField(User)
 	# add additional fields if required
-	test = models.BooleanField()
 
 	def __unicode__(self):
 		return self.user.username
@@ -60,5 +55,4 @@ class PDP(models.Model):
 	mentor = models.ForeignKey('Mentor')
 	mentee = models.ForeignKey('Mentee')
 	start_date = models.DateField(auto_now = True)
-	test = models.BooleanField()
 

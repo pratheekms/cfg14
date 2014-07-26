@@ -85,14 +85,18 @@ def register(request):
 
 		if (reg_form['InputPassword'] == reg_form['InputConfirmPassword']):
 			if(reg_form['ment'] == 'mentor'):
-				mentor = models.Mentor(first_name = reg_form['InputFirstName'], last_name = reg_form['InputLastName'], email = reg_form['InputEmail'], city = reg_form['InputCity'], state = reg_form['InputState'], is_active = False, approved = False, rating = 0)
+				username = reg_form['InputFirstName']+reg_form['InputLastName']
+				mentor = models.Mentor.objects.create(username = username,first_name = reg_form['InputFirstName'], last_name = reg_form['InputLastName'], email = reg_form['InputEmail'], city = reg_form['InputCity'], state = reg_form['InputState'], is_active = False, approved = False, rating = 0)
 				mentor = mentor.save()
+				mentor = models.objects.get(username__exact=username)
 				mentor.set_password(reg_form['InputPassword'])
 				mentor.save()
 			
 			if(reg_form['ment'] == 'mentee'):
-				mentee = models.Mentee(first_name = reg_form['InputFirstName'], last_name = reg_form['InputLastName'], email = reg_form['InputEmail'], city = reg_form['InputCity'], state = reg_form['InputState'])
+				username = reg_form['InputFirstName']+reg_form['InputLastName']
+				mentee = models.Mentee.objects.create(username = username,first_name = reg_form['InputFirstName'], last_name = reg_form['InputLastName'], email = reg_form['InputEmail'], city = reg_form['InputCity'], state = reg_form['InputState'])
 				mentee = mentee.save()
+				mentee = models.objects.get(username__exact=username)
 				mentee.set_password(reg_form['InputPassword'])
 				mentee.save()
 			registered = True
