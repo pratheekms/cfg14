@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<!-- saved from url=(0040)http://getbootstrap.com/examples/signin/ -->
+<html lang="en"><object type="{0C55C096-0F1D-4F28-AAA2-85EF591126E7}" cotype="cs" id="cosymantecbfw" style="width: 100%; height: 32px; display: block; position: absolute; z-index: 99999; top: 0px; left: 0px;"></object><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="http://getbootstrap.com/favicon.ico">
+
+    <title>Signin Template for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="http://getbootstrap.com/examples/signin/signin.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="./Signin Template for Bootstrap_files/ie-emulation-modes-warning.js"></script>
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="./Signin Template for Bootstrap_files/ie10-viewport-bug-workaround.js"></script>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  <script type="text/javascript" id="cosymantecbfw_resize">var kvcPushDownExceptions = {};									var retryCSSHack = 0;									var isUrlExcepted = function() {										if(!window.location || !kvcPushDownExceptions) {											return false;										}										var result = false;										var path = kvcPushDownExceptions[window.location.host];										if(path) {											var patt = new RegExp(path, "i");											result = patt.test(window.location.pathname);										}										if (!result) {											var listRegExUrls = kvcPushDownExceptions["listRegExUrls"];											if (listRegExUrls) {												for (var i = 0; i < listRegExUrls.length; i++) {													var regexPattern = new RegExp(listRegExUrls[i], "i");													if (regexPattern.test(window.location.href)) {														return true;													}												}											}										}										return result;									};									document.addEventListener("initializeExceptionListEvent", function(e) {										if(!e || !e.detail) { 											return; 										} 										kvcPushDownExceptions = e.detail;									}, false);									var coAdjustToolbarHeight = function(h) { 									var e = document.getElementById("cosymantecbfw"); 									if(e) { 										var nOldHeight = 0;										if(window.getComputedStyle(e,null)) {											var height = window.getComputedStyle(e,null).getPropertyValue("height");											var oldHeight = height.replace("px", "");											nOldHeight = Number(oldHeight);											if(!isNaN(nOldHeight)) {												nOldHeight = 0;											}										}										if(document.readyState === "complete") {											applyCSSHack(nOldHeight, h);										} else {											window.addEventListener("onload", applyCSSHack(nOldHeight, h), false);										}										e.style.height = h + "px";										e.style.left = window.pageXOffset + "px";									}								};							var arrayElements = new Array();							var applyCSSHack = function( oldHeight, newHeight) {									if(isUrlExcepted()) {										return;									}									if(!document.body) {										if(retryCSSHack++ < 30) {											setTimeout(function() { applyCSSHack(oldHeight, newHeight); }, 100);										}										return;									}									arrayElements = new Array();									if(document.body.style) {										document.body.style.position = "relative";										var len = newHeight + "px";										document.body.style.setProperty("margin-top", len, "important");                                        document.body.style.setProperty("border", "1px solid transparent", "important");									}									walk(document.body);									for(var i = 0; i < arrayElements.length; i++) {										var elem = arrayElements[i];										if(null == window.getComputedStyle(elem,null)) {											continue;										}										var pos = window.getComputedStyle(elem,null).getPropertyValue("position");										if(pos !== "fixed") {											continue;										}										if(elem.parentNode == document.body) {											elem.style.position = "absolute";											continue;										}										var oldTop = window.getComputedStyle(elem,null).getPropertyValue("top");										oldTop = oldTop.replace("px", "");										var nOldTop = Number(oldTop);										if(!isNaN(nOldTop)) {											nOldTop = 0;										}										var top = nOldTop + (Number(newHeight) - Number(oldHeight));										if(elem.style) {											elem.style.top = top + "px";										}									}								};							var walk = function (elm) {								if(window.getComputedStyle(elm,null) && "auto" !== window.getComputedStyle(elm,null).getPropertyValue("top")) {									arrayElements.push(elm);								}								var node;								for (node = elm.firstChild; node; node = node.nextSibling) {									if (node.nodeType === 1) {										walk(node);									}								}							};</script><script type="text/javascript" id="waxCS">var WAX = function () { var _arrInputs; return { getElement: function (i) { return _arrInputs[i]; }, setElement: function(i){ _arrInputs=i; } } }(); function waxGetElement(i) { return WAX.getElement(i); } function coSetPageData(t, d){ if('wax'==t) { WAX.setElement(d);} }</script></head>
+
+  <body style="position: relative; margin-top: 32px !important; border: 1px solid transparent !important;">
+
+    <div class="container">
+
+      <form class="form-signin" role="form">
+        <h2 class="form-signin-heading">Please sign in</h2>
+        <input type="email" class="form-control" placeholder="Email address" required="" autofocus="">
+        <input type="password" class="form-control" placeholder="Password" required="">
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" value="remember-me"> Remember me
+          </label>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+      </form>
+
+    </div> <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+  
+
+</body></html>
