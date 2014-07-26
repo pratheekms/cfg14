@@ -6,7 +6,7 @@ from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.models import User, Group
-
+from pdp import models
 
 def is_mentor(user):
 	return user.groups.filter(name = 'mentors')
@@ -55,6 +55,10 @@ def login(request):
 	else:
 		return render_to_response("login.html", {}, context)
 
+def register_mentor(request):
+	context = RequestContext(request)
+
+
 def mentor_dashboard(request):
 	return HttpResponse("Mentor dashboard")
 
@@ -69,3 +73,29 @@ def moderator_dashboard(request):
 
 def admin_dashboard(request):
 	return HttpResponse("admin dashboard")
+
+
+def register(request):
+    context = RequestContext(request)
+    registered = False
+    wrong_data = False
+
+    if request.method == 'POST':
+        mentor_form = request.POST
+
+        if mentor_form.is_valid():
+            user = user_form.save()
+            user.set_password(user.password)
+            user.save()
+
+            registered = True
+        else:
+        	render_to_response('regMentor.html', 'registered': registered,'wrong_data' : wrong_data, context)
+            
+
+    # Not a HTTP POST, so we render our form using two ModelForm instances.
+    # These forms will be blank, ready for user input.
+    else:
+        render_to_response('regMentor.html', 'registered': registered,'wrong_data' : wrong_data, context)
+
+    return render_to_response('regMentor.html', 'registered': registered,'wrong_data' : wrong_data, context)

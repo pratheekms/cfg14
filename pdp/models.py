@@ -44,3 +44,11 @@ class Admin(models.Model):
 	def __unicode__(self):
 		return self.user.username
 
+class PDP(models.Model):
+	approval_mentor = models.BooleanField(default = False)
+	approval_moderator = models.BooleanField(default = False)
+	success = models.BooleanField(default = False)
+	mentor = models.ForeignKey('Mentor')
+	mentee = models.ForeignKey('Mentee')
+	start_date = models.DateField(auto_now = True)
+

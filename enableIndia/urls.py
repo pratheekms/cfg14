@@ -14,4 +14,6 @@ urlpatterns = patterns('',
     url(r'mentee/', views.mentee_dashboard, name='mentee_dashboard'),
     url(r'admin/', views.admin_dashboard, name='admin_dashboard'),
     url(r'moderator/', views.moderator_dashboard, name='moderator_dashboard'),
+    url(r'mentor_register/', views.register_mentor, name='mentor_register'),
+
 )
