@@ -9,41 +9,46 @@ class Skills(models.Model):
 		)
 	category = models.CharField(max_length = 30, choices = category_list, default = 'Select a category')
 	sub_category = models.TextField()
+	test = models.BooleanField()
 
 class Mentor(User):
 #	user = models.OneToOneField(User)
-	id = models.AutoField(primary_key=True)
+#	id = models.AutoField(primary_key=True)
 	approved = models.BooleanField(default = False)
 	rating = models.PositiveIntegerField(default = 0, validators = [MaxValueValidator(10), MinValueValidator(100)])
 	mentor_skills = models.ManyToManyField(Skills)
-	city = models.CharField(max_length = 30)
-	state = models.CharField(max_length = 30) 
+	city = models.CharField(max_length = 30, blank = True)
+	state = models.CharField(max_length = 30, blank = True) 
+	test = models.BooleanField()
 
 	def __unicode__(self):
 		return self.user.username
 
 
-class Mentee(models.Model):
-	user = models.OneToOneField(User)
+class Mentee(User):
+#	user = models.OneToOneField(User)
 	mentor_skills = models.ManyToManyField(Skills)
-	city = models.CharField(max_length = 30)
-	state = models.CharField(max_length = 30) 
+	city = models.CharField(max_length = 30, blank = True)
+	state = models.CharField(max_length = 30, blank = True) 
 	# add additional fields if required
+	test = models.BooleanField()
 
 	def __unicode__(self):
 		return self.user.username
 
-class Moderator(models.Model):
-	user = models.OneToOneField(User)
+class Moderator(User):
+#	user = models.OneToOneField(User)
 	# add additional fields if required
+	test = models.BooleanField()
 
 	def __unicode__(self):
 		return self.user.username
 
 
-class Admin(models.Model):
-	user = models.OneToOneField(User)
+class Admin(User):
+#	user = models.OneToOneField(User)
 	# add additional fields if required
+	test = models.BooleanField()
 
 	def __unicode__(self):
 		return self.user.username
@@ -55,4 +60,5 @@ class PDP(models.Model):
 	mentor = models.ForeignKey('Mentor')
 	mentee = models.ForeignKey('Mentee')
 	start_date = models.DateField(auto_now = True)
+	test = models.BooleanField()
 
