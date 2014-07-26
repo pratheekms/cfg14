@@ -81,20 +81,25 @@ def register(request):
     wrong_data = False
 
     if request.method == 'POST':
-        mentor_form = request.POST
+        reg_form = request.POST
 
-        if mentor_form.is_valid():
-            user = user_form.save()
-            user.set_password(user.password)
-            user.save()
-
+        if (reg_form.is_valid() and (reg_form['InputPassword'] == reg_form['InputConfirmPassword'])):
+            if(reg_form['ment'] == 'mentor'):
+	            mentor = models.Mentor.objects.create(first_name = reg_form['InputFirstName'], last_name = reg_form['InputLastName'], email = reg_form['InputEmail'], city = reg_form['InputCity'], state = reg_form['InputState'], is_active = False, approved = False, rating = 0)
+	            mentor = mentor.save()
+	            mentor.set_password(reg_form['InputPassword'])
+	            mentor.save()
+	        if(reg_form['ment'] == 'mentee'):
+			    mentee = models.Mentee.objects.create(first_name = reg_form['InputFirstName'], last_name = reg_form['InputLastName'], email = reg_form['InputEmail'], city = reg_form['InputCity'], state = reg_form['InputState'])
+			    mentee = mentee.save()
+			    mentee.set_password(reg_form['InputPassword'])
+			    mentee.save()
             registered = True
         else:
+        	print reg_form, reg_form.errors
+        	wrong_data = True
         	render_to_response('regMentor.html', 'registered': registered,'wrong_data' : wrong_data, context)
             
-
-    # Not a HTTP POST, so we render our form using two ModelForm instances.
-    # These forms will be blank, ready for user input.
     else:
         render_to_response('regMentor.html', 'registered': registered,'wrong_data' : wrong_data, context)
 
