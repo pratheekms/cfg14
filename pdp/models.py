@@ -2,47 +2,47 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MaxValueValidator, MinValueValidator
 
-class Skills(models.Model):
-	category_list = (
-		('tech','Technology'),
-		('eng_speak','English speaking'),
-		)
-	category = models.CharField(max_length = 30, choices = category_list, default = 'Select a category')
+class Skill(models.Model):
+	category = models.CharField(max_length = 30)
 	sub_category = models.TextField()
 
-class Mentor(User):
-#	user = models.OneToOneField(User)
+class Mentor(models.Model):
+	user = models.OneToOneField(User)
 #	id = models.AutoField(primary_key=True)
 	approved = models.BooleanField(default = False)
 	rating = models.PositiveIntegerField(default = 0, validators = [MaxValueValidator(10), MinValueValidator(100)])
-	mentor_skills = models.ManyToManyField(Skills)
+	mentor_skills = models.ManyToManyField(Skill)
 	city = models.CharField(max_length = 30, blank = True)
-	state = models.CharField(max_length = 30, blank = True) 
+	state = models.CharField(max_length = 30, blank = True)
+	skype_id = models.CharField(max_length = 30, blank = True)
+	fb_id = models.CharField(max_length = 30, blank = True)
 
 	def __unicode__(self):
 		return self.user.username
 
 
-class Mentee(User):
-#	user = models.OneToOneField(User)
-	mentor_skills = models.ManyToManyField(Skills)
+class Mentee(models.Model):
+	user = models.OneToOneField(User)
+	mentor_skills = models.ManyToManyField(Skill)
 	city = models.CharField(max_length = 30, blank = True)
 	state = models.CharField(max_length = 30, blank = True) 
+	skype_id = models.CharField(max_length = 30, blank = True)
+	fb_id = models.CharField(max_length = 30, blank = True)	
 	# add additional fields if required
 
 	def __unicode__(self):
 		return self.user.username
 
-class Moderator(User):
-#	user = models.OneToOneField(User)
+class Moderator(models.Model):
+	user = models.OneToOneField(User)
 	# add additional fields if required
 
 	def __unicode__(self):
 		return self.user.username
 
 
-class Admin(User):
-#	user = models.OneToOneField(User)
+class Admin(models.Model):
+	user = models.OneToOneField(User)
 	# add additional fields if required
 
 	def __unicode__(self):

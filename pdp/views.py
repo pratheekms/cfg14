@@ -80,25 +80,38 @@ def register(request):
 	registered = False
 	wrong_data = False
 
-	if request.method == 'POST':
+	if (request.method == 'POST'):
 		reg_form = request.POST
 
 		if (reg_form['InputPassword'] == reg_form['InputConfirmPassword']):
-			if(reg_form['ment'] == 'mentor'):
-				username = reg_form['InputFirstName']+reg_form['InputLastName']
-				mentor = models.Mentor.objects.create(username = username,first_name = reg_form['InputFirstName'], last_name = reg_form['InputLastName'], email = reg_form['InputEmail'], city = reg_form['InputCity'], state = reg_form['InputState'], is_active = False, approved = False, rating = 0)
-				mentor = mentor.save()
-				mentor = models.objects.get(username__exact=username)
-				mentor.set_password(reg_form['InputPassword'])
-				mentor.save()
 			
-			if(reg_form['ment'] == 'mentee'):
-				username = reg_form['InputFirstName']+reg_form['InputLastName']
-				mentee = models.Mentee.objects.create(username = username,first_name = reg_form['InputFirstName'], last_name = reg_form['InputLastName'], email = reg_form['InputEmail'], city = reg_form['InputCity'], state = reg_form['InputState'])
+			user = User.objects.create_user(username=reg_form['InputUsername'], email=reg_form['InputEmail'],first_name = reg_form['InputFirstName'], last_name = reg_form['InputLastName'], password = reg_form['InputPassword'] )
+
+			if(reg_form['ment'] == 'mentor'):
+				mentor = models.Mentor(user = user, approved = False, rating = 0, skype_id = reg_form['SkypeId'], fb_id = reg_form['FbId'], state = reg_form['InputState'], city = reg_form['InputCity'])
+				mentor = mentor.save()
+				categories = request.POST.getlist('category')
+				for category in categories:
+					skill = Skills(category = category, sub_category = reg_form['InputMessage'])
+					skill.save()
+					mentor.mentor_skills.add(skill)
+					mentor.save()
+				g = Group.objects.get(name='mentors') 
+				g.user_set.add(mentor)
+				return redirect('pdp.views.mentor_dashboard')
+							
+			elif(reg_form['ment'] == 'mentee'):
+				mentee = models.Mentee(user = user,skype_id = reg_form['SkypeId'], fb_id = reg_form['FbId'], state = reg_form['InputState'], city = reg_form['InputCity'])
 				mentee = mentee.save()
-				mentee = models.objects.get(username__exact=username)
-				mentee.set_password(reg_form['InputPassword'])
-				mentee.save()
+				for category in categories:
+					skill = Skills(category = category, sub_category = reg_form['InputMessage'])
+					skill.save()
+					mentee.mentee_skills.add(skill)
+					mentee.save()
+				g = Group.objects.get(name='mentees') 
+				g.user_set.add(mentee)
+				return redirect('pdp.views.mentee_dashboard')
+
 			registered = True
 		else:
 			print reg_form, reg_form.errors
