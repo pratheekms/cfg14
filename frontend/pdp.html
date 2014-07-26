@@ -77,55 +77,28 @@
 		<div class="col-lg-9">
         
 		<h2>Checklist</h2>
-		
+		<form action="/YOUR_WORK" method="post">
 		<div class="row" id='app' style="margin-top:5%">
 			
-			<div class="col-lg-12">
-			<div class="input-group panel panel-default">
-			  <span class="input-group-addon">
-				<input type="checkbox">
-			  </span>
-			 <p>is is an objective</p>
-			</div><!-- /input-group -->
-		  </div>
-		  
-		  <div class="col-lg-12" >
-			<div class="input-group panel panel-default">
-			  <span class="input-group-addon">
-				<input type="checkbox">
-			  </span>
-			 <p>is is an objective</p>
-			</div><!-- /input-group -->
-		  </div>
-		  <div class="col-lg-12">
-			<div class="input-group panel panel-default">
-			  <span class="input-group-addon">
-				<input type="checkbox">
-			  </span>
-			 <p>is is an objective</p>
-			</div><!-- /input-group -->
-		  </div>
-		  <div class="col-lg-12">
-			<div class="input-group panel panel-default">
-			  <span class="input-group-addon">
-				<input type="checkbox">
-			  </span>
-			 <p>is is an objective</p>
-			</div><!-- /input-group -->
-		  </div>
+			
 
         <script>
 			function add(){
-				document.getElementById("app").innerHTML+='<div class="col-lg-12"><div class="input-group panel panel-default"><span class="input-group-addon"><input type="checkbox"></span><input type="text" class="form-control"></div></div>';
+				
+				document.getElementById("app").innerHTML+='<div class="col-lg-12"><div class="input-group panel panel-default"><span class="input-group-addon"><input type="checkbox"></span>'+ document.getElementById("val").value+'<input type="hidden" value="'+document.getElementById("val").value+'"></input></div></div>';
 			}
 		</script>
 		
 						
 			</div>
 		</div>
+		</form>
 		</div>
+		<textarea class="form-control" id="val" value="" rows="3"></textarea>
 		<a class="btn btn-primary btn-lg" onclick="add()" role="button">Add More</a>
-        <hr>
+        <input type="submit" value="Save" class="btn btn-primary btn-lg"/>
+		</form>
+		<hr>
 
         <!-- Footer -->
         <footer>
