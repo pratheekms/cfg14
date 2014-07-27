@@ -2,7 +2,7 @@ offset=25;
 arr = [];
 
 
-function mouseReqDispatcher(event)
+function mrd(event)
 {
 	
 	var x = event.clientX;
@@ -16,19 +16,23 @@ function mouseReqDispatcher(event)
 		else
 		{
 			arr[i].focus();
-			console.log("Thgis isa sdfa",arr[i].offset().height);
+			console.log("Thgis isa sdfa");
 		}
 		
 	}
 }
 
 
-//
+
 
 
 $(document).ready(function(){
 
-$("body").attr("onmousemove","mouseReqDispatcher(event)");
+
+
+
+//$("body").attr("onmousemove","mrd(event)");
+document.addEventListener("mousemove",mrd)
 
 $("a").each(function() {
     var link = $(this);
