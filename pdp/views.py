@@ -61,7 +61,22 @@ def login(request):
 		return render_to_response("login.html", {}, context)
 
 def search(request):
-	search = False
+	context = RequestContext(request)
+	if(request.method == 'POST'):
+		if(search in request.keys()):
+			search_query = request['search']
+		else:
+			return render_to_response("search.html", {'mentors': mentors}, context)
+		if(category in request.keys()):
+			category = request['category']
+		else:
+			category = ''
+		mentors = User.objects.filter(username__contains='search_query')
+		return render_to_response("search.html", {'mentors': mentors, 'category':category}, context)
+
+	else:
+		mentors = User.objects.all()
+		return render_to_response("search.html", {'mentors': mentors}, context)
 
 
 def register_mentor(request):
