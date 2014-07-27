@@ -1,0 +1,15 @@
+{
+  "manifest_version": 2,
+
+  "name": "InMouseTrainer",
+  "description": "This extension helps users reach the buttons that matter on the page faster and simpler.",
+  "version": "1.0",
+  
+  "background": {
+    "scripts": ["jquery.js", "popup.js"]
+  },
+  
+  "permissions": [
+    "tabs"
+  ]
+}
