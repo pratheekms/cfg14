@@ -139,6 +139,10 @@ def moderator_dashboard(request):
 def admin_dashboard(request):
 	return HttpResponse("admin dashboard")
 
+def checklist(request):
+	context = RequestContext(request)
+	return render_to_response("checklist.html",{}, context)
+
 
 def register(request):
 	context = RequestContext(request)

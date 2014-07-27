@@ -16,6 +16,8 @@ urlpatterns = patterns('',
     url(r'^moderator/', views.moderator_dashboard, name='moderator_dashboard'),
     url(r'^register/', views.register, name='register'),
     url(r'^search/', views.search, name='search'),
+    url(r'^checklist/[a-zA-Z]+/[a-zA-Z:/\.]+/', views.checklist, name='checklist'),
+
 
 
 )

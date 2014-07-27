@@ -105,7 +105,7 @@
                 }
                 </h3>
                 <p>Interests : {{ mentor.mentor_skills.all()[0].sub_category }}</p>
-                <a href="google.com" class="btn btn-primary btn-sm">Connect</a>
+                <a href="/checklist/{{ mentor.skype_id }}/{{ mentor.fb_id }}/" class="btn btn-primary btn-sm">Connect</a>
             </div>
             {% endfor %}
         </div>
