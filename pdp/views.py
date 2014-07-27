@@ -38,9 +38,9 @@ def search(request):
 		temp = []
 		for m in  mentors.all():
 			try:
+				print m
 				a = [m.username, m.mentor.category, m.mentor.sub_category]
-				if(len(a) == 3):
-					temp.append(m.mentor)
+				temp.append(m.mentor)
 			except:
 				a = [m.username, m.username, m.username]
 				temp.append(a)
