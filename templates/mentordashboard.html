@@ -66,42 +66,21 @@
 		<h1>NAME</h1>
 		<div class="row">
 		<div class="col-lg-9">
+
+		{% for mentee in mentees %}
         <div class="row" style="margin-top:5%">
 			
 			<div class="panel panel-default">
 				<div class="panel-body">
-					<h2>Name __YOUR_WORK__</h2>
-					<p>description</p>
+					<h2>MENTEE NAME : {{ mentee.username }} </h2>
+					<p>{{ mentee.mentee_skills.all()[0].category }}</p>
 				</div>
-			  <div class="panel-footer">Mentee details</div>
+			  <div class="panel-footer">Mentee details : {{ mentee.mentee_skills.all()[0].category }}</div>
 			</div>
+		{% endfor %}
 
         </div>
-		
-		<div class="row" style="margin-top:5%">
-			
-			<div class="panel panel-default">
-				<div class="panel-body">
-					<h2>Name __YOUR_WORK__</h2>
-					<p>description</p>
-				</div>
-			  <div class="panel-footer">Mentee details</div>
-			</div>
 
-        </div>
-		
-		
-		<div class="row" style="margin-top:5%">
-			
-			<div class="panel panel-default">
-				<div class="panel-body">
-					<h2>Name __YOUR_WORK__</h2>
-					<p>description</p>
-				</div>
-			  <div class="panel-footer">Mentee details</div>
-			</div>
-
-        </div>
 		
 		</div>
 		
@@ -109,34 +88,13 @@
 				
 				<div class="panel panel-default">
 				  <div class="panel-body">
-					This Is a REquest __YOUR_WORK__
+					This is a Request from a mentee1.
 				  </div>
 				</div>
 				<div class="panel panel-default">
 				  <div class="panel-body">
-					This Is a REquest __YOUR_WORK__
+					This is a Request from a mentee2.
 				  </div>
-				</div>
-				<div class="panel panel-default">
-				  <div class="panel-body">
-					This Is a REquest __YOUR_WORK__
-				  </div>
-				</div>
-				<div class="panel panel-default">
-				  <div class="panel-body">
-					This Is a REquest __YOUR_WORK__
-				  </div>
-				</div>
-				<div class="panel panel-default">
-				  <div class="panel-body">
-					This Is a REquest __YOUR_WORK__
-				  </div>
-				</div>
-				<div class="panel panel-default">
-				  <div class="panel-body">
-					This Is a REquest __YOUR_WORK__
-				  </div>
-				</div>
 				
 			</div>
 		</div>

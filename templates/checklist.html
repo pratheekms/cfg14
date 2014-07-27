@@ -72,7 +72,7 @@
           <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
             60%
           </div>
-        </div
+        </div>
         
         <h2>Checklist</h2>
         <form action="/YOUR_WORK" method="post">
@@ -88,6 +88,7 @@
                 document.getElementById("val").value = "";
                 checkCounter += 1;
             }
+
         </script>
         
                         
@@ -101,9 +102,9 @@
         
         <hr>
 
-        <a href="skype:__PLEASE__FILL__MENTOR'S__SKYPE__ID_HERE__?call&video=true">Start A Skype Session</a>
-        <a href="__PLEASE__FILL__MENTOR'S__FACEBOOK__PROFILE'S__LINK__HERE__">Connect On Facebook</a>
-        
+        <a class="btn btn-primary "  id="skype" href="http://www.skype.com/en/">Start A Skype Session</a>
+        <a class="btn btn-primary " id="fb" href="http://www.facebook.com">Connect On Facebook</a>
+
         <!-- Footer -->
         <footer>
             <div class="row">
@@ -123,7 +124,14 @@
 
     <!-- Bootstrap Core JavaScript -->
     <script src="{% static "js/bootstrap.min.js" %}"></script>
-
+    <script >
+            var url = window.location.pathname; 
+        var re = /.*checklist\/(.*)\//; 
+        var newtext = url.replace(re, "$1"); 
+        var users = newtext.split("/"); //users is what you have to use
+        document.getElementById("skype").href = "skype:" + users[0] + "?call&video=true";
+        document.getElementById("fb").href = users[1] ;
+</script>
 </body>
 
 </html>
