@@ -9,7 +9,7 @@ class Skill(models.Model):
 class Mentor(models.Model):
 	user = models.OneToOneField(User)
 #	id = models.AutoField(primary_key=True)
-	approved = models.BooleanField(default = False)
+	approved = models.BooleanField(default = True)
 	rating = models.PositiveIntegerField(default = 0, validators = [MaxValueValidator(10), MinValueValidator(100)])
 	mentor_skills = models.ManyToManyField(Skill)
 	city = models.CharField(max_length = 30, blank = True)
@@ -23,7 +23,7 @@ class Mentor(models.Model):
 
 class Mentee(models.Model):
 	user = models.OneToOneField(User)
-	mentor_skills = models.ManyToManyField(Skill)
+	mentee_skills = models.ManyToManyField(Skill)
 	city = models.CharField(max_length = 30, blank = True)
 	state = models.CharField(max_length = 30, blank = True) 
 	skype_id = models.CharField(max_length = 30, blank = True)
@@ -50,7 +50,7 @@ class Admin(models.Model):
 
 class PDP(models.Model):
 	approval_mentor = models.BooleanField(default = False)
-	approval_moderator = models.BooleanField(default = False)
+	approval_moderator = models.BooleanField(default = True)
 	success = models.BooleanField(default = False)
 	mentor = models.ForeignKey('Mentor')
 	mentee = models.ForeignKey('Mentee')

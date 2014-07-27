@@ -21,8 +21,13 @@ def is_admin(user):
 	return user.__class__ == 'Admin'
 
 #FIXME
-def check_pdp(user):
-	return HttpResponse("mentee page")
+def check_pdp(user, context):
+	pdp = PDP.objects.filter(mentee=user.mentee)
+	if(len(pdp) == 1):
+		return render_to_response('search.html',{'pdp': pdp, 'user_mentee':user}, context)
+	else:
+		return redirect('pdp.views.search')
+
 
 
 
@@ -44,7 +49,7 @@ def login(request):
 				auth_login(request, user)
 				if(is_mentor(user)):
 					return redirect('pdp.views.mentor_dashboard')
-				elif(is_mentee(user)):
+				elif(is_mentee(user, context)):
 					check_pdp(user)
 				elif(is_moderator):
 					return redirect('pdp.views.moderator_dashboard')
@@ -54,6 +59,10 @@ def login(request):
 			return HttpResponse("Invalid login details.")
 	else:
 		return render_to_response("login.html", {}, context)
+
+def search(request):
+	search = False
+
 
 def register_mentor(request):
 	context = RequestContext(request)
@@ -89,9 +98,17 @@ def register(request):
 
 			if(reg_form['ment'] == 'mentor'):
 				mentor = models.Mentor(user = user, approved = False, rating = 0, skype_id = reg_form['SkypeId'], fb_id = reg_form['FbId'], state = reg_form['InputState'], city = reg_form['InputCity'])
-				categories = request.POST.getlist('category')
-				for category in categories:
-					skill = Skills(category = category, sub_category = reg_form['InputMessage'])
+				mentor.save()
+				if request.POST.get('personal', True):
+					skill = models.Skill(category = 'Personal Development', sub_category = reg_form['InputMessage'])
+					skill.save()
+					mentor.mentor_skills.add(skill)
+				if request.POST.get('learning', True):
+					skill = models.Skill(category = 'Learning', sub_category = reg_form['InputMessage'])
+					skill.save()
+					mentor.mentor_skills.add(skill)
+				if request.POST.get('job', True):
+					skill = models.Skill(category = 'Job', sub_category = reg_form['InputMessage'])
 					skill.save()
 					mentor.mentor_skills.add(skill)
 				mentor.save()
@@ -101,9 +118,17 @@ def register(request):
 							
 			elif(reg_form['ment'] == 'mentee'):
 				mentee = models.Mentee(user = user,skype_id = reg_form['SkypeId'], fb_id = reg_form['FbId'], state = reg_form['InputState'], city = reg_form['InputCity'])
-				mentee = mentee.save()
-				for category in categories:
-					skill = Skills(category = category, sub_category = reg_form['InputMessage'])
+				mentee.save()
+				if request.POST.get('personal', True):
+					skill = models.Skill(category = 'Personal Development', sub_category = reg_form['InputMessage'])
+					skill.save()
+					mentee.mentee_skills.add(skill)
+				if request.POST.get('learning', True):
+					skill = models.Skill(category = 'Learning', sub_category = reg_form['InputMessage'])
+					skill.save()
+					mentee.mentee_skills.add(skill)
+				if request.POST.get('job', True):
+					skill = models.Skill(category = 'Job', sub_category = reg_form['InputMessage'])
 					skill.save()
 					mentee.mentee_skills.add(skill)
 				mentee.save()
