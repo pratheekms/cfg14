@@ -101,10 +101,10 @@
             <div class="col-lg-4 col-sm-6 text-center">
                 
                 <h3>{{ mentor.username }}
-                    <small>{{ mentor.mentor.mentor_skills.all()[0].category }}</small>
+                    <small>{{ mentor.mentor_skills.all()[0].category }}</small>
                 }
                 </h3>
-                <p>Interests : {{ mentor.mentor.mentor_skills.all()[0].sub_category }}</p>
+                <p>Interests : {{ mentor.mentor_skills.all()[0].sub_category }}</p>
                 <a href="google.com" class="btn btn-primary btn-sm">Connect</a>
             </div>
             {% endfor %}

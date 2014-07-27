@@ -31,14 +31,29 @@ def search(request):
 			return render_to_response("search.html", {'mentors': mentors}, context)
 		if(category in request.keys()):
 			category = request['category']
+			mentors = User.objects.filter(username__contains='search_query')
 		else:
 			category = ''
-		mentors = User.objects.filter(username__contains='search_query')
-		return render_to_response("search.html", {'mentors': mentors, 'category':category}, context)
+			mentors = User.objects.all()
+		temp = []
+		for m in  mentors.all():
+			try:
+				temp.append(m.mentor)
+			except:
+				pass
 
-	else:
-		mentors = User.objects.all()
-		return render_to_response("search.html", {'mentors': mentors}, context)
+		print temp
+		return render_to_response("search.html", {'mentors': temp, 'category':category}, context)
+
+	mentors = User.objects.all()
+	temp = []
+	for m in  mentors.all():
+		try:
+			temp.append(m.mentor)
+		except:
+			pass
+	print temp
+	return render_to_response("search.html", {'mentors': temp}, context)
 
 
 #FIXME
