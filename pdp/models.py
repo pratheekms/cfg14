@@ -15,7 +15,7 @@ class Mentor(models.Model):
 	city = models.CharField(max_length = 30, blank = True)
 	state = models.CharField(max_length = 30, blank = True)
 	skype_id = models.CharField(max_length = 30, blank = True)
-	fb_id = models.CharField(max_length = 30, blank = True)
+	fb_id = models.CharField(max_length = 100, blank = True)
 
 	def __unicode__(self):
 		return self.user.username
@@ -27,7 +27,7 @@ class Mentee(models.Model):
 	city = models.CharField(max_length = 30, blank = True)
 	state = models.CharField(max_length = 30, blank = True) 
 	skype_id = models.CharField(max_length = 30, blank = True)
-	fb_id = models.CharField(max_length = 30, blank = True)	
+	fb_id = models.CharField(max_length = 120, blank = True)	
 	# add additional fields if required
 
 	def __unicode__(self):

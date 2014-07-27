@@ -100,11 +100,12 @@
 			{% for mentor in mentors %}
             <div class="col-lg-4 col-sm-6 text-center">
                 
-                <h3>{{ mentor.username }}
-                    <small>{{ mentor.mentor_skills.all()[0].category }}</small>
-                }
+                <h3>{{ mentor.0 }}
+                    <small>{{ mentor.1 }</small>
+                
                 </h3>
-                <p>Interests : {{ mentor.mentor_skills.all()[0].sub_category }}</p>
+                <p>Interests : {{ mentor.2 }}</p>
+                    {{ endif }}
                 <a href="/checklist/{{ mentor.skype_id }}/{{ mentor.fb_id }}/" class="btn btn-primary btn-sm">Connect</a>
             </div>
             {% endfor %}
