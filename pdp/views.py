@@ -7,6 +7,7 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.models import User, Group
 from pdp import models
+from django.views.decorators.csrf import csrf_exempt
 
 def is_mentor(user):
 	return user.groups.filter(name = 'mentors')
@@ -20,13 +21,34 @@ def is_moderator(user):
 def is_admin(user):
 	return user.__class__ == 'Admin'
 
+@csrf_exempt
+def search(request):
+	context = RequestContext(request)
+	if(request.method == 'POST'):
+		if(search in request.keys()):
+			search_query = request['search']
+		else:
+			return render_to_response("search.html", {'mentors': mentors}, context)
+		if(category in request.keys()):
+			category = request['category']
+		else:
+			category = ''
+		mentors = User.objects.filter(username__contains='search_query')
+		return render_to_response("search.html", {'mentors': mentors, 'category':category}, context)
+
+	else:
+		mentors = User.objects.all()
+		return render_to_response("search.html", {'mentors': mentors}, context)
+
+
 #FIXME
 def check_pdp(user, context):
-	pdp = PDP.objects.filter(mentee=user.mentee)
+	pdp = models.PDP.objects.filter(mentee=user.mentee)
 	if(len(pdp) == 1):
 		return render_to_response('search.html',{'pdp': pdp, 'user_mentee':user}, context)
 	else:
-		return redirect('pdp.views.search')
+		return render_to_response('search.html',{}, context)
+		
 
 
 
@@ -40,25 +62,26 @@ def login(request):
 	context = RequestContext(request)
 
 	if(request.method == 'POST'):
-		username = request.POST['username']
-		password = request.POST['password']
+		username = request.POST['InputUsername']
+		password = request.POST['InputPassword']
 		user = authenticate(username=username, password=password)
-		
 		if user:
 			if user.is_active:
 				auth_login(request, user)
 				if(is_mentor(user)):
 					return redirect('pdp.views.mentor_dashboard')
-				elif(is_mentee(user, context)):
-					check_pdp(user)
+				elif(is_mentee(user)):
+					check_pdp(user,context)
 				elif(is_moderator):
 					return redirect('pdp.views.moderator_dashboard')
 				elif(is_admin):
 					return redirect('pdp.views.admin_dashboard')
 		else:
-			return HttpResponse("Invalid login details.")
+			return render_to_response("login.html", {}, context)
 	else:
 		return render_to_response("login.html", {}, context)
+	return render_to_response("login.html", {}, context)
+
 
 def search(request):
 	context = RequestContext(request)
@@ -77,6 +100,9 @@ def search(request):
 	else:
 		mentors = User.objects.all()
 		return render_to_response("search.html", {'mentors': mentors}, context)
+	mentors = User.objects.all()
+	print mentors
+	return render_to_response("search.html", {'mentors': mentors}, context)
 
 
 def register_mentor(request):
